@@ -1,7 +1,7 @@
 {
   "name": "videochat_app",
   "version": "1.0.0",
-  "description": "A barebone videochat app ",
+  "description": "A barebone videochat app",
   "main": "index.js",
   "scripts": {
     "test": "nodemon index",

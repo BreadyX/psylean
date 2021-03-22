@@ -14,12 +14,13 @@ app.set('views', './views');
 app.use(express.json());
 app.use(express.urlencoded({'extended': false}));
 app.use('/static', express.static('./static'));
-app.use(session({              
-  secret: "cats",
-  name: "sessionid",
+app.use(session({
+  secret: 'cats',
+  name: 'sessionid',
   resave: true,
-  saveUninitialized: true         // TODO: add 'secure' and a cookie session store suitable for production
-})); 
+  // TODO: add 'secure' and a cookie session store suitable for production
+  saveUninitialized: true
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 http.listen(3000, () => {
-    console.log('listening on: 3000');
-  });
-  
-  module.exports = app;
+  console.log('listening on: 3000');
+});
+
+module.exports = app;
