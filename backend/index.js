@@ -13,6 +13,7 @@ app.set('views', './views');
 // MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({'extended': false}));
+
 app.use('/static', express.static('./static'));
 app.use(session({
   secret: 'cats',
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req, res) => {
   res.render('homepage', { });
 });
-
+ 
 http.listen(3000, () => {
   console.log('listening on: 3000');
 });
