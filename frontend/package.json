@@ -1,0 +1,19 @@
+{
+  "name": "videochat_app",
+  "version": "1.0.0",
+  "description": "A barebone videochat app",
+  "main": "index.js",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "author": "Alexandru Gabriel Bradatan",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0"
+  }
+}
