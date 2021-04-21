@@ -9,7 +9,7 @@ Link repository [GitHub](https://github.com/leo-bianconi/videochat_app).
 ### Fase 0 (fase attuale)
 Fase di brainstorming, analisi della domanda, delle funzionalità e dei costi.
 Fase di sviluppo del progetto nei particolari tecnici.
-Realizzazione di business model e 
+Realizzazione del business model.
 
 ### Fase 1
 Realizzazione della versione Alpha di PsyLean! In questa fase verrà creata l'infrastruttura a supporto della web-app. Per quanto riguarda il back-end: realizzazione di database, routing di base, connessione con il front-end. Per il front-end: realizzazione di un'interfaccia grafica di base (primi components e layout molto schematizzati) Deployment: un piccolo webserver verrà messo a disposizione per la fase di testing e, successivamente, per l'analisi di quanto fatto da programmatori esterni e possibili investitori.
