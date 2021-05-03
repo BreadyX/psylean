@@ -3,10 +3,44 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>videochat_app v0.0.0</title>
+    <style>
+      * {
+        font-family: 'Montserrat', sans-serif;
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #noscript-div {
+        font-size: 14pt;
+        text-align: justify;
+        width: 75%;
+        margin: auto;
+      }
+      #noscript-div h2 {
+        font-size: 34pt;
+        margin-bottom: 8px;
+      }
+      #noscript-div p {
+        margin-top: 5px;
+      }
+    </style>
   </head>
   <body>
+    <noscript>
+      <div id="noscript-div">
+        <h2>:(</h2>
+        <p>
+          Siamo spiacenti, ma Psylean non funzionerà correttamente se Javascript
+          è disabilitato. La preghiamo di abilitarlo nelle impostazioni del
+          proprio browser prima di continuare.
+        </p>
+      </div>
+    </noscript>
     <div id="app"></div>
-    <!-- Stuff will be injected by huejs -->
+    <!-- Stuff will be injected by vuejs -->
   </body>
 </html>
