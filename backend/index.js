@@ -5,6 +5,8 @@ const http = require('http').createServer(app);
 const options = {};
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const www = require('./routes/www');
+const logger = require('./routes/logger');
 
 // SETTINGS
 app.set('view engine', 'ejs');
@@ -24,9 +26,9 @@ app.use(session({
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.render('homepage', { });
-});
+// ROUTES MIDDLEWARE
+app.use('/', logger);
+app.use('/', www);
  
 http.listen(3000, () => {
   console.log('listening on: 3000');
