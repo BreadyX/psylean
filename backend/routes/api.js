@@ -36,5 +36,5 @@ router.delete('/user/id/:id', (req, res) => {
     });
 });
 
-// todo: add all the other REST operations
+// todo: add all the other REST operations.
 module.exports = router;
