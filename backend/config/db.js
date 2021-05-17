@@ -22,6 +22,7 @@ db.once('reconnected', () => console.log('Reconnected to the database.'));
 // SCHEMAS
 const p = new mongoose.Schema({
     email: { type: String, required: true, trim: true, lowercase: true },
+    username : { type: String, required: true, trim: true, lowercase: true, minLenght: 3 },
     password: { type: String, required: true },
     emailVerified: { type: Boolean, required: true, default: false },
     psyIdVerified: { type: Boolean, required: true, default: false },
@@ -46,8 +47,14 @@ const Code = mongoose.model('Code', c);
 // just an example: populating the db
 /*
 const myPsychologist = new Professional({
-
-}) */
+    email: 'bread@psylean.com',
+    username: 'bread',
+    password: 'blablabla',
+    fullName: 'Alexandru Gabriel Bradatan',
+    dateJoined: Date.now()
+})
+myPsychologist.save();
+*/
 
 // EXPORTS
 module.exports = { Professional, Code };
