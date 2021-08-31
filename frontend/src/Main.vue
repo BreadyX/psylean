@@ -6,7 +6,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  watch: {
+    $route: {
+      handler(to) {
+        document.title =
+          to.meta.title === undefined
+            ? 'Psylean'
+            : `${to.meta.title} | Psylean`;
+      },
+      immediate: true
+    }
+  }
+};
 </script>
 
 <style lang="scss">
