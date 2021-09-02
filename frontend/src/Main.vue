@@ -1,6 +1,5 @@
 <template>
   <div>
-    Benvenuti su Psylean!
     <router-view />
   </div>
 </template>
@@ -27,8 +26,17 @@ export default {
   box-sizing: border-box;
 }
 
-body {
+:root {
+  font-weight: var(--text-normal);
+}
+
+body,
+html {
   margin: 0;
   padding: 0;
+  font-size: 100%;
+
+  color: var(--c-text);
+  background-color: var(--c-bg);
 }
 </style>

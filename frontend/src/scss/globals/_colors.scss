@@ -1,0 +1,100 @@
+@use 'sass:color';
+@use 'sass:map';
+
+@function tint($color, $amount) {
+  @return color.scale($color, $lightness: $amount);
+}
+
+@function desaturate($color, $amount) {
+  @return color.scale($color, $saturation: $amount);
+}
+
+@function opacity($color, $amount) {
+  @return color.scale($color, $alpha: $amount);
+}
+
+@function get-from-map($color, $level) {
+  $map-granularity: 12.5%;
+  $map: (
+    8: tint($color, 8 * $map-granularity),
+    7: tint($color, 7 * $map-granularity),
+    6: tint($color, 6 * $map-granularity),
+    5: tint($color, 5 * $map-granularity),
+    4: tint($color, 4 * $map-granularity),
+    3: tint($color, 3 * $map-granularity),
+    2: tint($color, 2 * $map-granularity),
+    1: tint($color, 1 * $map-granularity),
+    0: $color,
+    -1: tint($color, -1 * $map-granularity),
+    -2: tint($color, -2 * $map-granularity),
+    -3: tint($color, -3 * $map-granularity),
+    -4: tint($color, -4 * $map-granularity),
+    -5: tint($color, -5 * $map-granularity),
+    -6: tint($color, -6 * $map-granularity),
+    -7: tint($color, -7 * $map-granularity),
+    -8: tint($color, -8 * $map-granularity)
+  );
+
+  $c: map.get($map, $level);
+  @if $c != null {
+    @return $c;
+  } @else {
+    @error "Invalid level '" + $level + "'";
+  }
+}
+
+$light: hsla(0, 0%, 97%, 1);
+$dark: hsla(240, 6%, 16%, 1);
+$blue: hsla(207, 98%, 32%, 1);
+$green: hsla(129, 57%, 32%, 1);
+$red: hsla(359, 85%, 36%, 1);
+$purple: hsla(321, 76%, 16%, 1);
+
+$accent: $blue;
+
+:root {
+  --c-text: #{$dark};
+  --c-text-inverse: #{$light};
+  --c-text-secondary: #{get-from-map($dark, 2)};
+
+  --c-bg: #{$light};
+  --c-bg-inverse: #{$dark};
+
+  --c-shadow-on-light: #{opacity(get-from-map($light, -4), -50%)};
+  --c-shadow-on-light-faint: #{opacity(get-from-map($light, -4), -70%)};
+  --c-shadow-on-dark: #000;
+  --c-shadow-on-blue: #{opacity(get-from-map($blue, -3), -60%)};
+
+  --c-shadow-on-bg: var(--c-shadow-on-light);
+  --c-shadow-on-bg-faint: var(--c-shadow-on-light-faint);
+
+  --c-border: #{get-from-map($light, -1)};
+  --c-border-medium: #{get-from-map($light, -2)};
+  --c-border-heavy: #{get-from-map($light, -3)};
+  --c-disabled: #{get-from-map($dark, 7)};
+
+  --c-input: #{get-from-map($light, 7)};
+  --c-input-hover: #{get-from-map($light, 5)};
+  --c-input-disabled: var(--c-disabled);
+  --c-input-border-focus: #{$accent};
+  --c-input-shadow-focus: #{$accent};
+  --c-input-text: var(--c-text);
+  --c-input-text-disabled: var(--c-text-secondary);
+  --c-input-border-error: #{$red};
+  --c-input-shadow-error: #{$red};
+  --c-input-subelement-bg-focus: hsl(0, 0%, 90%);
+
+  --c-button: #{$blue};
+  --c-button-active: #{get-from-map($blue, -1)};
+  --c-button-hover: #{tint($blue, 2%)};
+  --c-button-disabled: var(--c-disabled);
+  --c-button-text: var(--c-text-inverse);
+  --c-button-text-disabled: var(--c-text-secondary);
+
+  --c-sky-gradient: linear-gradient(
+    to bottom right,
+    #{get-from-map($blue, 7)},
+    #{get-from-map($blue, 6)},
+    #{get-from-map($blue, 3)}
+  );
+}

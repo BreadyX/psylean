@@ -1,0 +1,36 @@
+@use '@/scss/globals/colors';
+@use '@/scss/globals/typography';
+@use '@/scss/globals/breakpoints';
+
+@forward '@/scss/globals/colors';
+@forward '@/scss/globals/breakpoints' show media;
+
+:root {
+  --radius-dialog: 30px;
+  --radius-element: 10px;
+  --radius-subelement: 7px;
+
+  --transition-speed: 0.2s;
+  --transition-speed-faster: calc(0.2s / 2);
+  --transition-speed-slower: calc(0.2s * 2);
+}
+
+.link {
+  color: var(--link, colors.$blue);
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:active {
+    transform: translateY(2%);
+  }
+
+  &:hover {
+    color: var(--link-hover, colors.tint(colors.$blue, 2%));
+  }
+}
+
+.link-secondary {
+  --link: var(--c-text-secondary);
+  --link-hover: var(--c-text-secondary);
+  @extend .link;
+}
