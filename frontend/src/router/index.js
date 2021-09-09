@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import NotFound from '@/views/NotFound.vue';
+import Home from '@/views/Home.vue';
 import Signin from '@/views/Signin.vue';
 import Guest from '@/views/signin/Guest.vue';
 import Login from '@/views/signin/Login.vue';
@@ -14,6 +15,12 @@ const routes = [
     meta: {
       title: 'Errore'
     }
+  },
+  {
+    path: '/about/:section?',
+    name: 'home',
+    alias: '/',
+    component: Home
   },
   {
     path: '/signin',
