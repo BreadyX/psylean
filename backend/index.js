@@ -28,7 +28,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES MIDDLEWARE
-app.use('/', logger);
+app.use('/', logger);   // change in production
 app.use('/', www);
 app.use('/api', api);
  
