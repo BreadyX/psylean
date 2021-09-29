@@ -21,15 +21,15 @@ db.once('reconnected', () => console.log('Reconnected to the database.'));
 
 // SCHEMAS
 const p = new mongoose.Schema({
-    email: { type: String, required: true, trim: true, lowercase: true },
-    username : { type: String, required: true, trim: true, lowercase: true, minLenght: 3 },
+    email: { type: String, required: true, trim: true, lowercase: true, maxLength: 128 },
+    username : { type: String, required: true, trim: true, lowercase: true, minLenght: 3, maxLength: 25 },
     password: { type: String, required: true },
     emailVerified: { type: Boolean, required: true, default: false },
     psyIdVerified: { type: Boolean, required: true, default: false },
     accountEnabled: { type: Boolean, required: true, default: true },
     psyId: { type: String },
     fullName: { type: String, required: true },
-    newsletter: { type: Boolean },
+    newsletter: { type: Boolean, required: true },
     dateJoined: { type: Date, required: true },
     bio: { type: String, required: false, trim: true, maxLength: 180 },
     propicString: { type: String, required: false, trim: true, lowercase: true }
