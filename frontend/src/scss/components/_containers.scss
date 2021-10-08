@@ -1,0 +1,8 @@
+@use '@/scss/globals' as *;
+
+@mixin container($shadow-var-prefix) {
+  background-color: var(--c-bg);
+  border: 1px solid var(--c-border);
+  box-shadow: 0 0 10px
+    var(--#{$shadow-var-prefix}-shadow-color, var(--c-shadow-on-bg));
+}
