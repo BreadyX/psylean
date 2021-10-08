@@ -1,0 +1,19 @@
+@use '@/scss/globals' as *;
+@use '@/scss/components/buttons' as btn;
+
+.colored-button {
+  @include btn.button-color($green);
+  font-size: var(--text-s);
+  width: 100%;
+  margin-top: var(--space-l);
+}
+
+.field,
+.combobox {
+  font-size: var(--text-s);
+  width: 100%;
+}
+
+.form-element + .form-element {
+  margin-top: var(--space-m);
+}
