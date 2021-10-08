@@ -1,0 +1,25 @@
+@use '@/scss/globals' as *;
+
+%button {
+  font-size: inherit;
+  font-weight: var(--text-semibold);
+  padding: var(--space-xs) var(--space-s);
+
+  border-style: solid;
+  border-width: 1px;
+  border-radius: var(--radius-element);
+
+  cursor: pointer;
+
+  transition-duration: var(--transition-speed);
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+@mixin button-color($color) {
+  --c-button: #{$color};
+  --c-button-active: #{get-from-map($color, -1)};
+  --c-button-hover: #{tint($color, 2%)};
+}
