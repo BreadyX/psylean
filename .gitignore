@@ -2,6 +2,3 @@ node_modules/
 
 # I (BreadyX) would kindly like to include this to exclude my editor config file
 _vimrc_local.vim
-
-# tsserver lsp config file
-jsconfig.json
