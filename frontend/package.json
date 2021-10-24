@@ -1,8 +1,8 @@
 {
-  "name": "videochat_app",
+  "name": "psylean-frontend",
   "version": "1.0.0",
-  "description": "A barebone videochat app",
-  "main": "index.js",
+  "description": "Vue3-based UI for Psylean",
+  "main": "src/main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"

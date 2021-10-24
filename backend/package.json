@@ -1,7 +1,7 @@
 {
-  "name": "videochat_app",
+  "name": "psylean-backend",
   "version": "1.0.0",
-  "description": "A barebone videochat app",
+  "description": "Expressjs-based backend for Psylean",
   "main": "index.js",
   "scripts": {
     "test": "nodemon index",
