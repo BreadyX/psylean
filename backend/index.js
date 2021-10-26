@@ -3,29 +3,29 @@ const app = express();
 
 const http = require('http').createServer(app);
 const options = {};
-const session = require('express-session');
-const bodyParser = require('body-parser');
 const www = require('./routes/www'),
   logger = require('./routes/logger'),
-  api = require('./routes/api');
+  api = require('./routes/api'),
+  passport = require('passport');
 
 // SETTINGS
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // MIDDLEWARE
+const session = require("express-session"),
+    bodyParser = require("body-parser");
+
+app.use(express.static("public"));
+app.use(session({ secret: "cats", resave: true, saveUninitialized: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(express.json());
 app.use(express.urlencoded({'extended': false}));
 
-app.use('/static', express.static('./static'));
-app.use(session({
-  secret: 'cats',
-  name: 'sessionid',
-  resave: true,
-  // TODO: add 'secure' and a cookie session store suitable for production
-  saveUninitialized: true
-}));
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES MIDDLEWARE
 app.use('/', logger);   // change in production

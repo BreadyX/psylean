@@ -4,6 +4,7 @@ const router = require('express').Router();
 const { Professional, Code } = require('../config/db');
 const bcrypt = require('bcrypt');
 const { pwSecure, fieldsSecure } = require('../config/security');
+const passport = require('passport');
 
 const saltRounds = 10;  // time complexity
 
@@ -50,9 +51,12 @@ router.post('/register', (req, res) => {
 });
 
 // LOGIN
-router.post('/login', (req, res) => {
-    ;
-});
+router.post('/login', 
+    passport.authenticate('local', {successRedirect: '/log-in-success', failureRedirect: '/log-in-failure'}),
+    function(req, res) {
+        res.redirect('/logged-in')
+    }
+);
 
 // GET INFORMATIONS
 // get all users
