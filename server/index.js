@@ -9,10 +9,6 @@ const bodyParser = require('body-parser');
 const www = require('./routes/www');
 const logger = require('./routes/logger');
 
-// SETTINGS
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
 // MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({'extended': false}));
