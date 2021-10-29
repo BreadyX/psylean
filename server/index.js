@@ -1,9 +1,12 @@
-const express = require('express');
-const app = express();
+require('dotenv').config();
+const { getEnv } = require('./globals');
+
 const path = require('path');
 
-const http = require('http').createServer(app);
+const express = require('express');
+const app = express();
 const session = require('express-session');
+const http = require('http').createServer(app);
 
 const www = require('./routes/www');
 
@@ -29,8 +32,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.use('/api', www);
 
-http.listen(3000, () => {
-  console.log('listening on: 3000');
+http.listen(getEnv('SERVER_PORT'), () => {
+  console.log(`listening on: ${getEnv('SERVER_PORT')}`);
 });
 
 module.exports = app;

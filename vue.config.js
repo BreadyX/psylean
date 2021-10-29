@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
   outputDir: './server/dist',
   configureWebpack: {
@@ -5,6 +7,10 @@ module.exports = {
   },
   devServer: {
     progress: false,
-    proxy: 'localhost:3000'
+    proxy: {
+      '^/api': {
+        target: 'http://localhost:' + process.env.SERVER_PORT
+      }
+    }
   }
 };
