@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
 const http = require('http').createServer(app);
 const options = {};
@@ -10,13 +11,12 @@ const logger = require('./routes/logger');
 
 // SETTINGS
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
 
 // MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({'extended': false}));
 
-app.use('/static', express.static('./static'));
 app.use(session({
   secret: 'cats',
   name: 'sessionid',
@@ -27,9 +27,13 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // ROUTES MIDDLEWARE
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'dist')));
+}
+
 app.use('/', logger);
-app.use('/', www);
- 
+app.use('/api', www);
+
 http.listen(3000, () => {
   console.log('listening on: 3000');
 });

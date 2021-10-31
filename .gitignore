@@ -1,4 +1,5 @@
 node_modules/
+dist/
 
 # I (BreadyX) would kindly like to include this to exclude my editor config file
 _vimrc_local.vim
