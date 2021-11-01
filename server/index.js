@@ -9,6 +9,7 @@ const session = require('express-session');
 const http = require('http').createServer(app);
 
 const www = require('./routes/www');
+const api = require('./routes/api');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,8 +30,9 @@ app.use('/', (req, _, next) => {
 });
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'dist')));
+  app.use('/', www);
 }
-app.use('/api', www);
+app.use('/api', api);
 
 http.listen(getEnv('SERVER_PORT'), () => {
   console.log(`listening on: ${getEnv('SERVER_PORT')}`);
