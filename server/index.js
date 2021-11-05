@@ -8,6 +8,8 @@ const app = express();
 const session = require('express-session');
 const http = require('http').createServer(app);
 
+require('./config/db');
+
 const www = require('./routes/www');
 const api = require('./routes/api');
 
