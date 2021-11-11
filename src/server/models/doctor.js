@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { regex } = require('../globals');
+const { regex } = require('../../globals');
 
 const doc = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,

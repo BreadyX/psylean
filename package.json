@@ -2,11 +2,11 @@
   "name": "psylean",
   "version": "1.0.0",
   "description": "Psylean website",
-  "main": "server/index.js",
+  "main": "src/server/index.js",
   "scripts": {
-    "test": "concurrently \"vue-cli-service serve\" \"nodemon server/index.js\"",
+    "test": "concurrently \"vue-cli-service serve\" \"nodemon src/server/index.js\"",
     "build": "vue-cli-service build",
-    "start": "node server/index.js"
+    "start": "node src/server/index.js"
   },
   "author": "",
   "license": "ISC",

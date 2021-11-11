@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { getEnv } = require('./globals');
+const { getEnv } = require('../globals');
 
 const path = require('path');
 

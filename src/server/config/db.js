@@ -1,4 +1,4 @@
-const { getEnv } = require('../globals');
+const { getEnv } = require('../../globals');
 
 const mongoose = require('mongoose');
 
