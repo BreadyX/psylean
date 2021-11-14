@@ -1,0 +1,56 @@
+@use 'sass:string';
+@use 'sass:map';
+@use 'sass:math';
+
+@mixin defineHSL($varName, $h, $s, $l, $a: 1) {
+  #{$varName}: unquote('hsla(#{$h}, #{$s}, #{$l}, #{$a})');
+  #{$varName}-h: #{$h};
+  #{$varName}-s: #{$s};
+  #{$varName}-l: #{$l};
+  #{$varName}-a: #{$a};
+}
+
+@function _unpack-color($color) {
+  $color: string.slice($color, 5, -2);
+  $h: var(#{$color + '-h'});
+  $s: var(#{$color + '-s'});
+  $l: var(#{$color + '-l'});
+  $a: var(#{$color + '-a'});
+  @return ('h': $h, 's': $s, 'l': $l, 'a': $a);
+}
+
+@function _scale-by-amount($var, $amount) {
+  @if unit($amount) != '%' {
+    @error 'Amount should be a percentage';
+  }
+  @if $amount > 0 {
+    @return calc(#{$var} + (100% - #{$var}) * #{math.div($amount, 100%)});
+  } @else {
+    @return calc(#{$var} * #{1 - math.div(math.abs($amount), 100%)});
+  }
+}
+
+@function _rotate-hue($var, $amount) {
+  @if not unitless($amount) {
+    @error 'Hue should be unitless';
+  }
+  @return calc(#{$var} + #{$amount});
+}
+
+@function mod($color, $hue: 0, $saturation: 0%, $lightness: 0%, $alpha: 0%) {
+  $c: _unpack-color($color);
+  @return hsla(
+    #{_rotate-hue(map.get($c, 'h'), $hue)},
+    #{_scale-by-amount(map.get($c, 's'), $saturation)},
+    #{_scale-by-amount(map.get($c, 'l'), $lightness)},
+    #{_scale-by-amount(map.get($c, 'a'), $alpha)}
+  );
+}
+
+@function get-tint($color, $number, $hue: 0, $saturation: 0%, $alpha: 0%) {
+  $granularity: 12.5%;
+  @if not unitless($number) {
+    @error 'Tint number should be unitless';
+  }
+  @return mod($color, $hue, $saturation, $number * $granularity, $alpha);
+}
