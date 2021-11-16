@@ -31,7 +31,7 @@ app.use('/', (req, _, next) => {
   next();
 });
 if (process.env.NODE_ENV === 'production') {
-  app.use('/', express.static(path.join(__dirname, 'dist')));
+  app.use('/static', express.static(path.join(__dirname, 'dist', 'static')));
   app.use('/', www);
 }
 app.use('/api', api);

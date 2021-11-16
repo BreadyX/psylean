@@ -2,6 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   outputDir: './src/server/dist',
+  assetsDir: 'static',
   configureWebpack: {
     devtool: 'source-map'
   },

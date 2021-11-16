@@ -7,9 +7,8 @@ const options = {
   root: basePath
 };
 
-router.get('/', (_, res, next) => {
-  res.sendFile('index.html', options).end();
-  next();
+router.get('/', (_, res) => {
+  res.sendFile('index.html', options);
 });
 
 module.exports = router;
