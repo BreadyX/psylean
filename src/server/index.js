@@ -1,18 +1,13 @@
 require('dotenv').config();
-const { getEnv } = require('../globals');
-
-const path = require('path');
-
-const express = require('express');
-const app = express();
-const session = require('express-session');
-const http = require('http').createServer(app);
-
 require('./config/db');
 
-const www = require('./routes/www');
-const api = require('./routes/api');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
 
+const { getEnv } = require('../globals');
+
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -26,18 +21,22 @@ app.use(
   })
 );
 
-app.use('/', (req, _, next) => {
+app.use((req, _, next) => {
   console.log(req.protocol, req.method, 'request from', req.ip);
   next();
 });
-if (process.env.NODE_ENV === 'production') {
+
+const www = require('./routes/www');
+if (getEnv('NODE_ENV', 'production') === 'production') {
   app.use('/static', express.static(path.join(__dirname, 'dist', 'static')));
   app.use('/', www);
 }
+
+const api = require('./routes/api');
 app.use('/api', api);
 
-http.listen(getEnv('SERVER_PORT'), () => {
-  console.log(`listening on: ${getEnv('SERVER_PORT')}`);
+app.listen(getEnv('SERVER_PORT', 3000), () => {
+  console.log(`listening on: ${getEnv('SERVER_PORT', 3000)}`);
 });
 
 module.exports = app;
