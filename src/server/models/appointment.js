@@ -38,7 +38,4 @@ const app = new mongoose.Schema({
   }
 });
 
-module.exports = {
-  schema: app,
-  model: mongoose.model('Appointment', app)
-};
+module.exports = mongoose.model('Appointment', app);

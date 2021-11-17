@@ -16,7 +16,4 @@ const p = new mongoose.Schema({
   }
 });
 
-module.exports = {
-  schema: p,
-  model: mongoose.model('Patient', p)
-};
+module.exports = mongoose.model('Patient', p);

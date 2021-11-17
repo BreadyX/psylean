@@ -68,7 +68,4 @@ const doc = new mongoose.Schema({
   }
 });
 
-module.exports = {
-  schema: doc,
-  model: mongoose.model('Doctor', doc)
-};
+module.exports = mongoose.model('Doctor', doc);
