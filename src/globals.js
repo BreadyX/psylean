@@ -1,7 +1,8 @@
 const { UndefinedEnvVarError } = require('./exceptions');
 
-function getEnv(variable) {
+function getEnv(variable, defaultValue) {
   if (variable in process.env) return process.env[variable];
+  else if (defaultValue !== undefined) return defaultValue;
   else throw new UndefinedEnvVarError(variable);
 }
 
