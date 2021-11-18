@@ -3,6 +3,7 @@ require('./config/db');
 
 const express = require('express');
 const session = require('express-session');
+const helmet = require('helmet');
 const path = require('path');
 
 const { getEnv } = require('../globals');
@@ -13,6 +14,7 @@ const certs = require('./config/https');
 
 const app = express();
 
+app.disable('x-powered-by');
 app.set('trust proxy', true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,6 +33,7 @@ app.use((req, _, next) => {
   console.log(req.protocol, req.method, 'request from', req.ip);
   next();
 });
+app.use(helmet());
 app.all('*', (req, res, next) => {
   if (req.secure) return next();
   res.redirect(`https://${req.hostname}:${httpsPort}${req.url}`);
