@@ -3,5 +3,8 @@ dist/
 
 .env
 
+src/server/sslcert/*
+!src/server/sslcert/README.md
+
 # I (BreadyX) would kindly like to include this to exclude my editor config file
 _vimrc_local.vim

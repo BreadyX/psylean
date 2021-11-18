@@ -7,7 +7,13 @@ const path = require('path');
 
 const { getEnv } = require('../globals');
 
+const httpPort = getEnv('HTTP_SERVER_PORT', 80);
+const httpsPort = getEnv('HTTPS_SERVER_PORT', 443);
+const certs = require('./config/https');
+
 const app = express();
+
+app.set('trust proxy', true);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -25,18 +31,26 @@ app.use((req, _, next) => {
   console.log(req.protocol, req.method, 'request from', req.ip);
   next();
 });
+app.all('*', (req, res, next) => {
+  if (req.secure) return next();
+  res.redirect(`https://${req.hostname}:${httpsPort}${req.url}`);
+});
 
 const www = require('./routes/www');
+const api = require('./routes/api');
 if (getEnv('NODE_ENV', 'production') === 'production') {
   app.use('/static', express.static(path.join(__dirname, 'dist', 'static')));
   app.use('/', www);
 }
-
-const api = require('./routes/api');
 app.use('/api', api);
 
-app.listen(getEnv('SERVER_PORT', 3000), () => {
-  console.log(`listening on: ${getEnv('SERVER_PORT', 3000)}`);
+app.listen(httpPort, () => {
+  console.log(`HTTP: listening on ${httpPort}`);
+});
+
+const https = require('https').createServer(certs, app);
+https.listen(httpsPort, () => {
+  console.log(`HTTPS: listening on ${httpsPort}`);
 });
 
 module.exports = app;
