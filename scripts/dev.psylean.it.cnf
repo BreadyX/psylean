@@ -1,0 +1,27 @@
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+
+[req_distinguished_name]
+countryName = Country Name (2 letter code)
+countryName_default = IT
+stateOrProvinceName = State or Province Name (full name)
+stateOrProvinceName_default = MI
+localityName = Locality Name (eg, city)
+localityName_default = Milano
+organizationalUnitName = Organizational Unit Name (eg, section)
+organizationalUnitName_default =
+commonName = Common name
+commonName_default = localhost
+commonName_max = 64
+
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+DNS.2 = dev.psylean.it
+IP.1 = 127.0.0.1
+IP.2 = 0.0.0.0
