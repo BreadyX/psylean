@@ -36,7 +36,7 @@ app.use((req, _, next) => {
 app.use(helmet());
 app.all('*', (req, res, next) => {
   if (req.secure) return next();
-  res.redirect(`https://${req.hostname}:${httpsPort}${req.url}`);
+  res.redirect(308, `https://${req.hostname}:${httpsPort}${req.url}`);
 });
 
 const www = require('./routes/www');
