@@ -8,8 +8,8 @@ const path = require('path');
 
 const { getEnv } = require('../globals');
 
-const httpPort = getEnv('HTTP_SERVER_PORT', 80);
-const httpsPort = getEnv('HTTPS_SERVER_PORT', 443);
+const httpPort = getEnv('HTTP_PORT', 80);
+const httpsPort = getEnv('HTTPS_PORT', 443);
 const certs = require('./config/https');
 
 const app = express();
