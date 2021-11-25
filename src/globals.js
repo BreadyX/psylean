@@ -1,9 +1,7 @@
-const { UndefinedEnvVarError } = require('./exceptions');
-
 function getEnv(variable, defaultValue) {
   if (variable in process.env) return process.env[variable];
   else if (defaultValue !== undefined) return defaultValue;
-  else throw new UndefinedEnvVarError(variable);
+  else throw new TypeError(`${variable} cannot be 'undefined'`);
 }
 
 const regex = {
