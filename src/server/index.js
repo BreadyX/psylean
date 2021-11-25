@@ -16,9 +16,7 @@ const app = express();
 
 app.disable('x-powered-by');
 app.set('trust proxy', true);
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
+app.use(helmet());
 app.use(
   session({
     secret: 'cats',
@@ -33,7 +31,6 @@ app.use((req, _, next) => {
   console.log(req.protocol, req.method, 'request from', req.ip);
   next();
 });
-app.use(helmet());
 app.all('*', (req, res, next) => {
   if (req.secure) return next();
   res.redirect(308, `https://${req.hostname}:${httpsPort}${req.url}`);
