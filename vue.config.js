@@ -12,8 +12,8 @@ module.exports = {
     progress: false,
     allowedHosts: ['dev.psylean.it'],
     https: {
-      key: 'src/server/sslcert/' + getEnv('SSL_PRIVATE_KEY'),
-      cert: 'src/server/sslcert/' + getEnv('SSL_CERTIFICATE')
+      key: 'src/server/sslcert/' + getEnv('SSL_KEY'),
+      cert: 'src/server/sslcert/' + getEnv('SSL_CERT')
     },
     proxy: {
       '^/api': {
