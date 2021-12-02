@@ -15,7 +15,13 @@ const regex = {
   name: /^(([A-Z])([a-z'àèìòù]|'[A-Z]){1,24}( )){1,5}(([A-Z])([a-z'àèìòù]|'[A-Z]){1,24})$/
 };
 
+const hostURL =
+  getEnv('NODE_ENV') === 'production'
+    ? new URL(`https://${getEnv('HOSTNAME')}`)
+    : new URL(`https://localhost:${getEnv('HTTPS_PORT')}`);
+
 module.exports = {
   getEnv,
+  hostURL,
   regex
 };
