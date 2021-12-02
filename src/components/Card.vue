@@ -11,6 +11,6 @@
   margin: var(--space-s);
   padding: var(--space-s);
 
-  overflow: scroll;
+  overflow: auto;
 }
 </style>

@@ -7,6 +7,20 @@ const customElements = ['box-icon'];
 module.exports = {
   outputDir: './src/server/dist',
   assetsDir: 'static',
+  pages: {
+    index: {
+      entry: 'src/index/main.js',
+      template: 'public/index.html',
+      title: 'Psylean',
+      chunks: ['chunk-vendors', 'chunk-common', 'index']
+    },
+    users: {
+      entry: 'src/users/main.js',
+      template: 'public/index.html',
+      title: 'Psylean',
+      chunks: ['chunk-vendors', 'chunk-common', 'users']
+    }
+  },
   chainWebpack: (config) => {
     config.module
       .rule('vue')
