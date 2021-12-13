@@ -3,6 +3,7 @@ const history = require('connect-history-api-fallback');
 const path = require('path');
 
 const { getEnv } = require('../../globals');
+const csrf = require('../service/csrf');
 
 const app = express();
 
@@ -37,7 +38,8 @@ app.get('/', (req, res, next) => {
   res.sendFile('index.html', options, (err) => errHandler(err, req, res, next));
 });
 
-app.get('/users', (req, res, next) => {
+app.get('/users', csrf, (req, res, next) => {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
   res.sendFile('users.html', options, (err) => errHandler(err, req, res, next));
 });
 

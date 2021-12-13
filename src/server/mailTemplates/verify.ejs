@@ -1,0 +1,75 @@
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Conferma il tuo account Psylean</title>
+    <style>
+      * {
+        font-family: 'Montserrat', sans-serif;
+      }
+      #header {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+      }
+      h1 {
+        margin: 0;
+        margin-left: 5px;
+        font-weight: normal;
+      }
+      #body {
+        max-width:500px;
+      }
+      p {
+        text-align: justify;
+      }
+      #btn {
+        width:100%;
+        text-align: center;
+      }
+      a {
+        background-color: white;
+        color: black;
+        text-decoration: none;
+        font-size: 1.1em;
+        border-radius: 10px;
+        border: solid 1px lightgray;
+        padding: 5px;
+        box-shadow: 0 0 5px hsla(0,0%,0%,0.2);
+      }
+      span {
+        font-family: monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="header">
+      <img src="<%-logoSrc-%>" alt="logo" width="64" height="64"/>
+      <h1>Psylean</h1>
+    </div>
+
+    <div id="body">
+      <p>
+      Siamo contenti di averti tra di noi! Per verificare la tua mail clicca sul
+      bottone sotto. Hai tempo 1 giorno per confermare la tua mail. Se non
+      confermerai la tua mail entro la scadenza, sarai costretto a ripetere il
+      processo di registrazione.
+      </p>
+
+      <div id="btn">
+        <a href="<%- verifyLink -%>">Verifica la tua mail</a>
+      </div>
+
+      <p>
+        Dopo aver verificato la tua mail inizierà il processo di verifica dei
+        tuoi dati, dopo di ché potrai iniziare a usare il tuo account.
+      </p>
+
+      <small>
+        Se non puoi cliccare sul bottone sopra, visita dal tuo browser il seguente
+        link:
+        <span><%- verifyLink -%></span>
+      </small>
+    </div>
+  </body>
+</html>

@@ -1,7 +1,27 @@
 const mongoose = require('mongoose');
-const { regex } = require('../../globals');
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
+
+const { getEnv, regex } = require('../../globals');
+
+const SALT_ROUNDS = getEnv('SALT_ROUNDS', 10);
 
 const doc = new mongoose.Schema({
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+    index: {
+      expireAfterSeconds: 60 * 60 * 24, // 1d
+      partialFilterExpression: {
+        emailVerified: false
+      }
+    }
+  },
+  verifyCode: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
@@ -10,7 +30,7 @@ const doc = new mongoose.Schema({
     maxlength: 128,
     trim: true
   },
-  password: {
+  _password: {
     type: String,
     required: true,
     trim: true
@@ -68,5 +88,22 @@ const doc = new mongoose.Schema({
     default: false
   }
 });
+
+doc.methods.genVerifyCode = async function () {
+  return new Promise((resolve) => {
+    const c = uuidv4();
+    this.verifyCode = c;
+    resolve(c);
+  });
+};
+
+doc.virtual('password').get(function () {
+  return this._password;
+});
+doc.methods.setPassword = async function (pw) {
+  if (pw.length < 8)
+    this.invalidate('_password', 'must be at least 8 characters', pw, 'length');
+  else this._password = await bcrypt.hash(pw, SALT_ROUNDS);
+};
 
 module.exports = mongoose.model('Doctor', doc);
