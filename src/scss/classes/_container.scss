@@ -1,0 +1,15 @@
+@use '@/scss/global' as *;
+
+.container {
+  display: block;
+  background-color: var(--color-card-bg);
+
+  border-style: solid;
+  border-width: var(--border-width);
+  border-radius: var(--border-radius-container);
+  border-color: var(--color-border);
+
+  box-shadow: 0 0 var(--box-shadow-far) var(--color-shadow);
+
+  padding: var(--space-xxs);
+}

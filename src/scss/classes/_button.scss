@@ -1,0 +1,93 @@
+@use '@/scss/color' as *;
+
+@mixin recolor($color, $color-text) {
+  --color-button-text: #{$color-text};
+  --color-button: #{$color};
+  --color-button-hover: #{get-tint($color, 0.25)};
+  --color-button-active: #{get-tint($color, -0.5)};
+}
+
+.button {
+  font-size: inherit;
+  font-weight: var(--text-semibold);
+  padding: var(--space-xs) var(--space-s);
+
+  border-style: solid;
+  border-width: var(--border-width);
+  border-radius: var(--border-radius-element);
+  border-color: transparent;
+
+  background-color: var(--color-button, var(--color-entry));
+  color: var(--color-button-text, var(--color-text));
+
+  cursor: pointer;
+
+  transition-duration: var(--transition-duration);
+
+  &.circle {
+    border-radius: 50%;
+  }
+
+  &.pill {
+    border-radius: var(--border-radius-pill);
+  }
+
+  &.outline {
+    color: var(--color-text);
+    background-color: transparent;
+    border-color: var(--color-button, var(--color-border));
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--color-button-text, var(--color-text));
+    }
+  }
+
+  &.flat {
+    color: var(--color-button, var(--color-text));
+    background-color: transparent;
+    border-color: transparent;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--color-button-text, var(--color-text));
+    }
+
+    &:disabled {
+      background-color: transparent;
+    }
+  }
+
+  &:hover {
+    background-color: var(--color-button-hover, var(--color-entry-hover));
+    border-color: transparent;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  &:active {
+    outline: none;
+    background-color: var(--color-button-active, var(--color-entry-active));
+    border-color: transparent;
+  }
+
+  &:disabled {
+    color: var(--color-text-secondary);
+    background: var(--color-disabled);
+    border-color: transparent;
+    cursor: default;
+  }
+
+  &.suggested {
+    @include recolor(var(--accent), var(--color-text-inverse));
+  }
+
+  &.destructive {
+    @include recolor(var(--red), var(--color-text-inverse));
+  }
+}

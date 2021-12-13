@@ -1,0 +1,58 @@
+@use '@/scss/global' as *;
+
+.input {
+  appearance: none;
+
+  background-color: var(--color-entry);
+  color: var(--color-text);
+  opacity: 1;
+
+  width: 200px;
+
+  font-size: inherit;
+  font-weight: var(--text-normal);
+
+  border-width: var(--border-width);
+  border-style: solid;
+  border-color: transparent;
+  border-radius: var(--border-radius-element);
+
+  box-shadow: none;
+
+  padding: var(--space-xs) var(--space-s);
+
+  transition-duration: var(--transition-duration);
+
+  &::placeholder {
+    color: var(--color-text);
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  &:disabled {
+    background-color: var(--color-disabled);
+    color: var(--color-secondary);
+    cursor: default;
+  }
+
+  &.validatable {
+    &:valid {
+      color: #{get-tint(var(--green), -2)};
+      background-color: #{get-tint(var(--green), 6)};
+    }
+
+    &:invalid {
+      color: var(--red);
+
+      &::placeholder {
+        color: var(--red);
+      }
+
+      background-color: #{get-tint(var(--red), 7)};
+    }
+  }
+}
