@@ -5,6 +5,7 @@ const p = new mongoose.Schema({
   doctor: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+    index: true,
     ref: 'Doctor'
   },
   name: {

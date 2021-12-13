@@ -4,6 +4,7 @@ const app = new mongoose.Schema({
   patient: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+    index: true,
     ref: 'Patient'
   },
   type: {
@@ -14,6 +15,8 @@ const app = new mongoose.Schema({
   },
   startDate: {
     type: Date,
+    index: true,
+    unique: true,
     required: true
   },
   endDate: {

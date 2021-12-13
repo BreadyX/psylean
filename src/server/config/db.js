@@ -1,8 +1,11 @@
 const { getEnv } = require('../../globals');
 
 const mongoose = require('mongoose');
+const options = {
+  autoIndex: true
+};
 
-mongoose.connect(getEnv('MONGODB_CONNECT_STRING')).catch((err) => {
+mongoose.connect(getEnv('MONGODB_CONNECT_STRING'), options).catch((err) => {
   throw err;
 });
 

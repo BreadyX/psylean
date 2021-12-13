@@ -5,6 +5,7 @@ const doc = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
     match: regex.email,
     maxlength: 128,
     trim: true
