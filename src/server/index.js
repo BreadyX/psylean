@@ -3,6 +3,7 @@ require('./config/db');
 
 const express = require('express');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const path = require('path');
 
@@ -16,9 +17,8 @@ const app = express();
 
 app.disable('x-powered-by');
 app.set('trust proxy', true);
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
+app.use(helmet());
+app.use(cookieParser());
 app.use(
   session({
     secret: 'cats',
@@ -28,12 +28,10 @@ app.use(
     saveUninitialized: true
   })
 );
-
 app.use((req, _, next) => {
   console.log(req.protocol, req.method, 'request from', req.ip);
   next();
 });
-app.use(helmet());
 app.all('*', (req, res, next) => {
   if (req.secure) return next();
   res.redirect(308, `https://${req.hostname}:${httpsPort}${req.url}`);
@@ -43,8 +41,8 @@ const www = require('./routes/www');
 const api = require('./routes/api');
 if (getEnv('NODE_ENV') === 'production') {
   app.use('/static', express.static(path.join(__dirname, 'dist', 'static')));
-  app.use('/', www);
 }
+app.use('/', www);
 app.use('/api', api);
 
 app.listen(httpPort, () => {

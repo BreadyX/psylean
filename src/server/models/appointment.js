@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
+function truncateAtMinutes(d) {
+  return d.setSeconds(0).setMillieconds(0);
+}
+
 const app = new mongoose.Schema({
   patient: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
+    index: true,
     ref: 'Patient'
   },
   type: {
@@ -14,11 +19,15 @@ const app = new mongoose.Schema({
   },
   startDate: {
     type: Date,
-    required: true
+    index: true,
+    unique: true,
+    required: true,
+    set: truncateAtMinutes
   },
   endDate: {
     type: Date,
     required: true,
+    set: truncateAtMinutes,
     validate: {
       validator: function (value) {
         if (value < this.startDate)

@@ -1,0 +1,31 @@
+@use '@/scss/color' as *;
+
+:root {
+  // Palette
+  @include defineHSL(--light, 0, 0%, 96%);
+  @include defineHSL(--dark, 240, 6%, 16%);
+  @include defineHSL(--blue, 207, 98%, 32%);
+  @include defineHSL(--green, 129, 57%, 32%);
+  @include defineHSL(--orange, 20, 100%, 44%);
+  @include defineHSL(--red, 359, 85%, 36%);
+  @include defineHSL(--purple, 321, 76%, 16%);
+
+  @include defineHSL(--accent, 207, 98%, 32%);
+
+  --color-bg: var(--light);
+  --color-card-bg: white;
+
+  --color-shadow-on-bg: #{get-tint(var(--light), -5, $alpha: -70%)};
+  --color-shadow: var(--color-shadow-on-bg);
+
+  --color-text: var(--dark);
+  --color-text-inverse: var(--light);
+  --color-text-secondary: #{get-tint(var(--dark), 3.5)};
+
+  --color-entry: #{get-tint(var(--light), -0.6)};
+  --color-entry-hover: #{get-tint(var(--light), -0.5)};
+  --color-entry-active: #{get-tint(var(--light), -0.8)};
+
+  --color-disabled: #{get-tint(var(--light), -0.3)};
+  --color-border: #{get-tint(var(--light), -1)};
+}

@@ -1,0 +1,99 @@
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:map';
+
+$_breakpoints: (
+  'phone': 420px,
+  'tablet': 767px
+);
+
+$_operators: (
+  '<': 'max-',
+  '>': 'min-'
+);
+
+$_media-expresssions: (
+  'screen': 'screen',
+  'print': 'print',
+  'handheld': 'handheld',
+  'landscape': '(orientation: landscape)',
+  'portrait': '(orientation: portrait)',
+  'retina2x':
+    '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
+  'retina3x':
+    '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)'
+);
+
+@function _parse-feature($op, $var, $is-width) {
+  $feature: '(' + map.get($_operators, $op);
+  @if $is-width == true {
+    $feature: $feature + 'width:';
+  } @else {
+    $feature: $feature + 'height:';
+  }
+
+  $val: null;
+  @if string.slice($var, 1, 1) == '=' {
+    $val: get-break-val(string.slice($var, 2, -1));
+  } @else {
+    @if _is-break-val($var) {
+      $val: map.get($_breakpoints, $var);
+      @if $op == '<' {
+        $val: $val - 1px;
+      } @else if $op == '>' {
+        $val: $val + 1px;
+      }
+    } @else {
+      $val: $var;
+    }
+  }
+  @return $feature + ' ' + $val + ')';
+}
+
+@function _concat-query($old, $add) {
+  $q: null;
+  @if $old != '' {
+    $q: $old + ' and ' + $add;
+  } @else {
+    $q: $add;
+  }
+  @return $q;
+}
+
+@function _is-break-val($var) {
+  $val: map.get($_breakpoints, $var);
+  @return $val != null;
+}
+
+@mixin media($feats...) {
+  $query: '';
+
+  @each $f in $feats {
+    $op: string.slice($f, 1, 1);
+    $feature: null;
+
+    @if list.index(map.keys($_operators), $op) != null {
+      $var: string.slice($f, 2, -1);
+      $feature: _parse-feature($op, $var, true);
+    } @else if $op == '|' {
+      $op: string.slice($f, 2, 2);
+      @if list.index(map.keys($_operators), $op) == null {
+        @error 'Invalid operator ' + $op;
+      }
+      $var: string.slice($f, 3, -1);
+      $feature: _parse-feature($op, $var, false);
+    } @else {
+      $exp: map.get($_media-expresssions, $f);
+      @if $exp == null {
+        @error 'Invalid media expression ' + $f;
+      }
+      $feature: $exp;
+    }
+
+    $query: _concat-query($query, $feature);
+  }
+
+  @media #{$query} {
+    @content;
+  }
+}

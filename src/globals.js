@@ -1,9 +1,7 @@
-const { UndefinedEnvVarError } = require('./exceptions');
-
 function getEnv(variable, defaultValue) {
   if (variable in process.env) return process.env[variable];
   else if (defaultValue !== undefined) return defaultValue;
-  else throw new UndefinedEnvVarError(variable);
+  else throw new TypeError(`${variable} cannot be 'undefined'`);
 }
 
 const regex = {
@@ -15,7 +13,13 @@ const regex = {
   name: /^(([A-Z])([a-z'àèìòù]|'[A-Z]){1,24}( )){1,5}(([A-Z])([a-z'àèìòù]|'[A-Z]){1,24})$/
 };
 
+const hostURL =
+  getEnv('NODE_ENV') === 'production'
+    ? new URL(`https://${getEnv('HOSTNAME')}`)
+    : new URL(`https://localhost:${getEnv('HTTPS_PORT')}`);
+
 module.exports = {
   getEnv,
+  hostURL,
   regex
 };

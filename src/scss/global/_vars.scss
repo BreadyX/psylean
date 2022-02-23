@@ -1,0 +1,16 @@
+:root {
+  --border-width: 1px;
+  --border-radius-container: 18px;
+  --border-radius-pill: 18px;
+  --border-radius-element: 10px;
+  --border-radius-element-nested: 7px;
+
+  --box-shadow-near: 1px;
+  --box-shadow-far: 5px 0px;
+  --drop-shadow-near: 1px;
+  --drop-shadow-far: 5px;
+
+  --transition-duration: 0.2s;
+  --transition-duration-faster: calc(0.2s / 2);
+  --transition-duration-slower: calc(0.2s * 2);
+}

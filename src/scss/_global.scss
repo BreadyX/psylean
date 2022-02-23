@@ -1,0 +1,19 @@
+@use '@/scss/color';
+@forward '@/scss/color';
+
+@use '@/scss/global/typography';
+@use '@/scss/global/colors';
+@use '@/scss/global/vars';
+
+* {
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
